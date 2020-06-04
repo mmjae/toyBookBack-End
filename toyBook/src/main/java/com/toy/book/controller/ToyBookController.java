@@ -5,7 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.toy.book.service.UserService;
@@ -22,11 +26,23 @@ public class ToyBookController {
 	@GetMapping("/users")
 	public List<HashMap<String,Object>> userList() {
 		
-		System.out.println("여기까진 들어옴");
 		
 		List<HashMap<String,Object>> result =userService.userList();
 		
 		return result;
+	}
+	
+	
+	@DeleteMapping("/delete/{delList}")
+	public String deleteUser(@PathVariable("delList") List<String> list) {
+		
+		for(String id : list) {
+			
+			System.out.println(id);
+			
+		}
+		
+		return null;
 	}
 	
 	
