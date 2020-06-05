@@ -9,5 +9,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserDao {
 
 	List<HashMap<String,Object>> userList();
+
+	
+	int delete(List<String> list);
 	
 }

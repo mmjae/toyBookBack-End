@@ -4,4 +4,13 @@
 	<select id="userList" resultType="java.util.HashMap">
 		SELECT * FROM USERS
 	</select>
+	
+	<delete id="delete" parameterType="java.util.List">
+			DELETE FROM USERS
+			<where>
+				<foreach collection="list" item="item" open="" close="" separator="OR">
+					ID=#{item}				
+				</foreach>
+			</where>
+	</delete>
 </mapper>

@@ -21,6 +21,27 @@ public class UserService {
 		 
 		 return result;
 	 }
+
+
+	public HashMap<String, String> deleteUser(List<String> list) {
+		
+		HashMap<String, String> resultMap= new HashMap<>();
+		
+		if(list.size()==0) {
+			resultMap.put("message", "삭제 할 회원을 선택해 주세요");
+			return resultMap;
+		}
+		
+		
+		int result=userDao.delete(list);
+		
+		if(result!=0) {
+			resultMap.put("message", "success");
+			return resultMap;
+		}
+		resultMap.put("message", "fail");
+		return resultMap;
+	}
 	
 	
 }
