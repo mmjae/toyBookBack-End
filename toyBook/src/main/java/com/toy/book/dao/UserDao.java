@@ -12,5 +12,8 @@ public interface UserDao {
 
 	
 	int delete(List<String> list);
+
+
+	void temporay(HashMap<String, Object> userData);
 	
 }

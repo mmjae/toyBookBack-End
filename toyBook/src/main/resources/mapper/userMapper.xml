@@ -13,4 +13,7 @@
 				</foreach>
 			</where>
 	</delete>
+	<insert id="temporay" parameterType="java.util.List">
+		INSERT INTO USERS VALUES((SELECT NVL(MAX(ID)+1,0) FROM USERS),#{userName},#{password},#{age},2)
+	</insert>
 </mapper>
