@@ -15,5 +15,11 @@ public interface UserDao {
 
 
 	void temporay(HashMap<String, Object> userData);
+
+
+	void addUser(HashMap<String, Object> userData);
+
+
+	HashMap<String, Object> selectAddUser(int userId);
 	
 }

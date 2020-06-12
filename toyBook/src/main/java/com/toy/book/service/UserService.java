@@ -41,10 +41,6 @@ public class UserService {
 	}
 
 	public HashMap<String, String> temporay(HashMap<String, Object> userData) {
-		//임시저장 할때 status가 2인건 1개밖에 없어야 함
-		//insert 전에 select로 2인걸 찾아서 2가 있으면 업데이트
-		//2가 없으면 insert 해야함
-		
 		HashMap<String, String> resultMap = new HashMap<>();
 		resultMap.put("message", "success");
 		try {
@@ -54,6 +50,30 @@ public class UserService {
 			System.out.println(e.getStackTrace());
 		}
 
+		return resultMap;
+	}
+	public HashMap<String, Object> addUser(HashMap<String, Object> userData) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("message", "success");
+		//HashMap<String, Object> tot = new HashMap<String, Object>();
+		try {
+			userDao.addUser(userData);
+		} catch (Exception e) {
+			resultMap.put("message", "fail");
+			System.out.println(e);
+			return resultMap;
+		}
+		
+		if(resultMap.get("message").equals("success")) {
+			int userId = (int)userData.get("idnum");
+			try {
+				System.out.println(userId);
+				resultMap = userDao.selectAddUser(userId);
+				resultMap.put("message", "success");
+			}catch(Exception e){
+				resultMap.put("message", "fail");
+			}
+		}
 		return resultMap;
 	}
 

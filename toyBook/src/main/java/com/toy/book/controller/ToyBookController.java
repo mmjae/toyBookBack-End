@@ -38,7 +38,6 @@ public class ToyBookController {
 	
 	@DeleteMapping("/delete")
 	public HashMap<String,String> deleteUser(@RequestBody List<String> list) {
-		
 		HashMap<String,String> result = userService.deleteUser(list);
 		
 		return result;
@@ -46,9 +45,13 @@ public class ToyBookController {
 	
 	@PostMapping("/temporayuser")
 	public HashMap<String, String> tempoUser(@RequestBody HashMap<String,Object> userData){
-		
 		HashMap<String,String> result = userService.temporay(userData);
-		
+		return result;
+	}
+	
+	@PostMapping("/add")
+	public HashMap<String,Object> addUser(@RequestBody HashMap<String,Object> userData){
+		HashMap<String,Object> result =userService.addUser(userData);
 		return result;
 	}
 	
