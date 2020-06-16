@@ -11,7 +11,7 @@ public interface UserDao {
 	List<HashMap<String,Object>> userList();
 
 	
-	int delete(List<String> list);
+	int delete(List<HashMap<String, Object>> list);
 
 
 	void temporay(HashMap<String, Object> userData);
@@ -21,5 +21,8 @@ public interface UserDao {
 
 
 	HashMap<String, Object> selectAddUser(int userId);
+
+
+	void updateUser(List<HashMap<String, Object>> list);
 	
 }

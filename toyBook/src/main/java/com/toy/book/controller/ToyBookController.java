@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +27,7 @@ public class ToyBookController {
 	public List<HashMap<String,Object>> userList() {
 		
 		
-		List<HashMap<String,Object>> result =userService.userList();
+		List<HashMap<String,Object>> result = userService.userList();
 		
 		return result;
 	}
@@ -37,9 +38,9 @@ public class ToyBookController {
 	
 	
 	@DeleteMapping("/delete")
-	public HashMap<String,String> deleteUser(@RequestBody List<String> list) {
-		HashMap<String,String> result = userService.deleteUser(list);
+	public HashMap<String,String> deleteUser(@RequestBody List<HashMap<String,Object>> list) {
 		
+		HashMap<String,String> result = userService.deleteUser(list);
 		return result;
 	}
 	
@@ -53,6 +54,15 @@ public class ToyBookController {
 	public HashMap<String,Object> addUser(@RequestBody HashMap<String,Object> userData){
 		HashMap<String,Object> result =userService.addUser(userData);
 		return result;
+	}
+	
+	@PutMapping("/users")
+	public HashMap<String,Object> updateUser(@RequestBody List<HashMap<String,Object>> list)
+	{
+		
+		HashMap<String,Object> result =userService.updateUser(list);
+		return result;
+		
 	}
 	
 	

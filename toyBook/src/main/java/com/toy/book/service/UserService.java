@@ -21,7 +21,7 @@ public class UserService {
 		return result;
 	}
 
-	public HashMap<String, String> deleteUser(List<String> list) {
+	public HashMap<String, String> deleteUser(List<HashMap<String, Object>> list) {
 
 		HashMap<String, String> resultMap = new HashMap<>();
 
@@ -73,6 +73,18 @@ public class UserService {
 			}catch(Exception e){
 				resultMap.put("message", "fail");
 			}
+		}
+		return resultMap;
+	}
+
+	public HashMap<String, Object> updateUser(List<HashMap<String, Object>> list) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("message", "success");
+		try {
+			userDao.updateUser(list);
+		}catch(Exception e){
+			resultMap.put("message", "fail");
+			System.out.println(e);
 		}
 		return resultMap;
 	}

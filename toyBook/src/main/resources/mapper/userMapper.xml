@@ -9,7 +9,7 @@
 			DELETE FROM USERS
 			<where>
 				<foreach collection="list" item="item" open="" close="" separator="OR">
-					ID=#{item}				
+					ID=#{item.ID}				
 				</foreach>
 			</where>
 	</delete>
@@ -25,6 +25,13 @@
 	<select id="selectAddUser" parameterType="int" resultType="java.util.HashMap">
 		SELECT * FROM USERS WHERE ID = #{userId}
 	</select>
-	
-	
+	<update id="updateUser" parameterType="java.util.List">
+			<foreach collection="list" item="item" open="DECLARE BEGIN" close="; END;" separator=";">
+				UPDATE USERS
+				SET USERNAME = #{item.USERNAME},
+					PASSWORD = #{item.PASSWORD},
+					AGE = #{item.AGE}
+				WHERE ID = #{item.ID}
+			</foreach>	
+	</update>
 </mapper>
