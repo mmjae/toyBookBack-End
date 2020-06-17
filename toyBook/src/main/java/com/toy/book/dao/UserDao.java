@@ -24,5 +24,8 @@ public interface UserDao {
 
 
 	void updateUser(List<HashMap<String, Object>> list);
+
+	
+	List<HashMap<String, Object>> getTempoUsers();
 	
 }

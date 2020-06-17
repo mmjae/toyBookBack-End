@@ -50,6 +50,15 @@ public class ToyBookController {
 		return result;
 	}
 	
+	@GetMapping("/temporayuser")
+	public List<HashMap<String,Object>> getTempousers(){
+		List<HashMap<String,Object>> result = userService.getTempoUsers();
+		return result;
+	}
+	
+	
+	
+	
 	@PostMapping("/add")
 	public HashMap<String,Object> addUser(@RequestBody HashMap<String,Object> userData){
 		HashMap<String,Object> result =userService.addUser(userData);

@@ -1,5 +1,6 @@
 package com.toy.book.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,19 +44,28 @@ public class UserService {
 	public HashMap<String, String> temporay(HashMap<String, Object> userData) {
 		HashMap<String, String> resultMap = new HashMap<>();
 		resultMap.put("message", "success");
+		if (userData.get("password") == null) {
+			userData.put("password", "");
+		}
+
+		if (userData.get("age") == null) {
+			userData.put("age", "");
+		}
+
 		try {
 			userDao.temporay(userData);
 		} catch (Exception e) {
 			resultMap.put("message", "fail");
-			System.out.println(e.getStackTrace());
+			System.out.println(e);
 		}
 
 		return resultMap;
 	}
+
 	public HashMap<String, Object> addUser(HashMap<String, Object> userData) {
 		HashMap<String, Object> resultMap = new HashMap<>();
 		resultMap.put("message", "success");
-		//HashMap<String, Object> tot = new HashMap<String, Object>();
+		// HashMap<String, Object> tot = new HashMap<String, Object>();
 		try {
 			userDao.addUser(userData);
 		} catch (Exception e) {
@@ -63,14 +73,14 @@ public class UserService {
 			System.out.println(e);
 			return resultMap;
 		}
-		
-		if(resultMap.get("message").equals("success")) {
-			int userId = (int)userData.get("idnum");
+
+		if (resultMap.get("message").equals("success")) {
+			int userId = (int) userData.get("idnum");
 			try {
 				System.out.println(userId);
 				resultMap = userDao.selectAddUser(userId);
 				resultMap.put("message", "success");
-			}catch(Exception e){
+			} catch (Exception e) {
 				resultMap.put("message", "fail");
 			}
 		}
@@ -82,11 +92,22 @@ public class UserService {
 		resultMap.put("message", "success");
 		try {
 			userDao.updateUser(list);
-		}catch(Exception e){
+		} catch (Exception e) {
 			resultMap.put("message", "fail");
 			System.out.println(e);
 		}
 		return resultMap;
+	}
+
+	public List<HashMap<String, Object>> getTempoUsers() {
+		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
+		try {
+			result = userDao.getTempoUsers();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return result;
 	}
 
 }

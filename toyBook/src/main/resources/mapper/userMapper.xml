@@ -4,34 +4,49 @@
 	<select id="userList" resultType="java.util.HashMap">
 		SELECT * FROM USERS ORDER BY ID
 	</select>
-	
+
+	<select id="getTempoUsers" resultType="java.util.HashMap">
+		SELECT 
+		ID, USERNAME, PASSWORD, AGE, TO_CHAR(SAVEDATE,'YYYY-MM-DD HH24:MI:SS') SAVEDATE
+		FROM TEMPORAY_USER
+		ORDER BY SAVEDATE DESC
+	</select>
+
+
 	<delete id="delete" parameterType="java.util.List">
-			DELETE FROM USERS
-			<where>
-				<foreach collection="list" item="item" open="" close="" separator="OR">
-					ID=#{item.ID}				
-				</foreach>
-			</where>
+		DELETE FROM USERS
+		<where>
+			<foreach collection="list" item="item" open="" close=""
+				separator="OR">
+				ID=#{item.ID}
+			</foreach>
+		</where>
 	</delete>
 	<insert id="temporay" parameterType="java.util.HashMap">
-		INSERT INTO TEMPORAY_USER VALUES(#{username},#{password},#{age},SYSDATE)
+		INSERT INTO TEMPORAY_USER
+		VALUES(#{username},#{password},#{age},SYSDATE,(SELECT NVL(MAX(ID)+1,0) FROM TEMPORAY_USER))
 	</insert>
 	<insert id="addUser" parameterType="java.util.HashMap">
-		INSERT INTO USERS VALUES((SELECT NVL(MAX(ID)+1,0) FROM USERS),#{userName},#{password},#{age})
-		<selectKey keyProperty="idnum" order="AFTER" resultType="int">
-			SELECT (SELECT NVL(MAX(ID),0) FROM USERS) AS idnum FROM DUAL
+		INSERT INTO USERS VALUES((SELECT NVL(MAX(ID)+1,0) FROM
+		USERS),#{userName},#{password},#{age})
+		<selectKey keyProperty="idnum" order="AFTER"
+			resultType="int">
+			SELECT (SELECT NVL(MAX(ID),0) FROM USERS) AS idnum FROM
+			DUAL
 		</selectKey>
 	</insert>
-	<select id="selectAddUser" parameterType="int" resultType="java.util.HashMap">
+	<select id="selectAddUser" parameterType="int"
+		resultType="java.util.HashMap">
 		SELECT * FROM USERS WHERE ID = #{userId}
 	</select>
 	<update id="updateUser" parameterType="java.util.List">
-			<foreach collection="list" item="item" open="DECLARE BEGIN" close="; END;" separator=";">
-				UPDATE USERS
-				SET USERNAME = #{item.USERNAME},
-					PASSWORD = #{item.PASSWORD},
-					AGE = #{item.AGE}
-				WHERE ID = #{item.ID}
-			</foreach>	
+		<foreach collection="list" item="item" open="DECLARE BEGIN"
+			close="; END;" separator=";">
+			UPDATE USERS
+			SET USERNAME = #{item.USERNAME},
+			PASSWORD = #{item.PASSWORD},
+			AGE = #{item.AGE}
+			WHERE ID = #{item.ID}
+		</foreach>
 	</update>
 </mapper>
