@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.toy.book.dao.UserDao;
 
@@ -107,6 +108,25 @@ public class UserService {
 			System.out.println(e);
 		}
 
+		return result;
+	}
+	
+	@Transactional
+	public HashMap<String, Object> delTempoUsers(List<HashMap<String, Object>> list) {
+		HashMap<String, Object> result= new HashMap<String, Object>();
+		result.put("message", "success");
+		//delete 리턴값 알아보고 
+		//다중 delete 찾아봐야됨
+		if(list.size()==0) {
+			result.put("message", "삭제할 데이터를 선택해 주세요.");
+			return result;
+		}
+		
+		int resultInt = userDao.delTempoUsers(list);
+		if(resultInt==0) {
+			result.put("message", "fail");
+		}
+		
 		return result;
 	}
 

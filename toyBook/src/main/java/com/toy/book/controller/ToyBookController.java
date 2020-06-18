@@ -56,6 +56,14 @@ public class ToyBookController {
 		return result;
 	}
 	
+	@DeleteMapping("/temporayuser")
+	public HashMap<String,Object> delTempousers(@RequestBody List<HashMap<String,Object>> list){
+		HashMap<String,Object> result = userService.delTempoUsers(list);
+		return result;
+	}
+	
+	
+	
 	
 	
 	

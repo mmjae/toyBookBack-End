@@ -27,5 +27,8 @@ public interface UserDao {
 
 	
 	List<HashMap<String, Object>> getTempoUsers();
+
+
+	int delTempoUsers(List<HashMap<String, Object>> list);
 	
 }

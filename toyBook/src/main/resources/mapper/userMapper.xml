@@ -49,4 +49,12 @@
 			WHERE ID = #{item.ID}
 		</foreach>
 	</update>
+	<delete id="delTempoUsers" parameterType="java.util.List">
+		DELETE FROM TEMPORAY_USER
+		<where>
+			<foreach collection="list" item="item" open="" close="" separator="OR">
+				(ID = #{item.ID})
+			</foreach>		
+		</where>
+	</delete>
 </mapper>
