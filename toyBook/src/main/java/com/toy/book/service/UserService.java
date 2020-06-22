@@ -15,6 +15,7 @@ public class UserService {
 
 	@Autowired
 	UserDao userDao;
+	
 
 	public List<HashMap<String, Object>> userList() {
 
@@ -78,7 +79,6 @@ public class UserService {
 		if (resultMap.get("message").equals("success")) {
 			int userId = (int) userData.get("idnum");
 			try {
-				System.out.println(userId);
 				resultMap = userDao.selectAddUser(userId);
 				resultMap.put("message", "success");
 			} catch (Exception e) {
